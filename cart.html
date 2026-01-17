@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- DJANGO: {% load static %} -->
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -17,7 +18,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
+    <!-- DJANGO: href="{% static 'css/style.css' %}" -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="responsive.css" />
 
     <style>
       /* =========================================
@@ -347,27 +350,101 @@
     <header>
       <div class="container">
         <nav class="nav-island">
-          <a href="index.html" class="logo">
-            <i class="fa-solid fa-dragon"></i>
-            <span>FPT<span style="font-weight: 300">.Future</span></span>
-          </a>
+          <div class="nav-left">
+            <a href="index.html" class="logo">
+              <i class="fa-solid fa-dragon"></i>
+              <span>36<span style="font-weight: 300">.RauMa</span></span>
+            </a>
+            <div class="cat-menu-wrapper">
+              <div class="cat-menu-btn">
+                <i class="fa-solid fa-bars"></i> Danh mục
+              </div>
+              <div class="cat-dropdown">
+                <ul>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-laptop"></i> Laptop</a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="fa-solid fa-desktop"></i> PC Đồng Bộ</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-brands fa-apple"></i> Apple</a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="fa-solid fa-microchip"></i> Linh Kiện</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-tv"></i> Màn Hình</a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa-solid fa-headset"></i> Phụ Kiện</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <form class="search-box">
-            <input type="text" placeholder="Tìm kiếm..." />
+            <input type="text" placeholder="Tìm kiếm Laptop, PC..." />
             <button type="submit" class="search-btn">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
           <div class="nav-actions">
             <button class="action-btn">
-              <i class="fa-regular fa-bell"></i>
+              <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
             </button>
             <button class="action-btn">
-              <i class="fa-regular fa-user"></i>
+              <a href="login.html"><i class="fa-regular fa-user"></i></a>
+            </button>
+            <button class="action-btn">
+              <a href="cart.html"> <i class="fa-solid fa-bag-shopping"></i></a>
+              <span class="badge-dot"></span>
             </button>
           </div>
         </nav>
       </div>
     </header>
+
+    <!-- Mobile Menu Sidebar -->
+    <aside class="mobile-menu">
+      <div class="mobile-menu-header">
+        <h3>Danh mục sản phẩm</h3>
+        <button class="mobile-menu-close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <ul class="mobile-menu-list">
+        <li>
+          <a href="view-all.html"><i class="fa-solid fa-laptop"></i> Laptop</a>
+        </li>
+        <li>
+          <a href="view-all.html"
+            ><i class="fa-solid fa-desktop"></i> PC Đồng Bộ</a
+          >
+        </li>
+        <li>
+          <a href="view-all.html"><i class="fa-brands fa-apple"></i> Apple</a>
+        </li>
+        <li>
+          <a href="view-all.html"
+            ><i class="fa-solid fa-microchip"></i> Linh Kiện</a
+          >
+        </li>
+        <li>
+          <a href="view-all.html"><i class="fa-solid fa-tv"></i> Màn Hình</a>
+        </li>
+        <li>
+          <a href="view-all.html"
+            ><i class="fa-solid fa-headset"></i> Phụ Kiện</a
+          >
+        </li>
+      </ul>
+    </aside>
+    <div class="mobile-menu-overlay"></div>
 
     <div class="container" style="margin-top: -10px; margin-bottom: 10px">
       <p style="font-size: 13px; color: var(--text-sub)">
@@ -382,6 +459,7 @@
 
     <main class="container cart-layout">
       <div class="cart-container">
+        <!-- DJANGO: If cart is empty, show message -->
         <div class="cart-header">
           <input type="checkbox" class="custom-checkbox" checked />
           <span>Tất cả (3 sản phẩm)</span>
@@ -391,6 +469,7 @@
           ></i>
         </div>
 
+        <!-- DJANGO: Loop Cart Items -->
         <div class="cart-item">
           <input type="checkbox" class="custom-checkbox" checked />
           <div class="item-img">
@@ -474,6 +553,7 @@
           </div>
           <i class="fa-solid fa-xmark btn-delete"></i>
         </div>
+        <!-- DJANGO: End Loop -->
       </div>
 
       <div class="order-summary">
@@ -492,6 +572,7 @@
         </div>
         <div class="summary-row">
           <span>Giảm giá</span>
+          <!-- DJANGO: Discount logic -->
           <span style="color: #22c55e">-0đ</span>
         </div>
 
@@ -510,7 +591,13 @@
           (Đã bao gồm VAT)
         </p>
 
-        <button class="btn-checkout">MUA HÀNG NGAY</button>
+        <!-- DJANGO: Checkout Form/Link -->
+        <button
+          class="btn-checkout"
+          onclick="window.location.href = 'checkout.html'"
+        >
+          MUA HÀNG NGAY
+        </button>
       </div>
     </main>
 
@@ -519,16 +606,18 @@
         <span>Tổng cộng:</span>
         <span class="mc-price">20.669.000đ</span>
       </div>
-      <button class="mc-btn">Mua Hàng (3)</button>
+      <button class="mc-btn" onclick="window.location.href = 'checkout.html'">
+        Mua Hàng (3)
+      </button>
     </div>
 
     <div class="mobile-bottom-nav">
       <a href="index.html" class="nav-item"
         ><i class="fa-solid fa-house"></i><span>Trang chủ</span></a
       >
-      <a href="#" class="nav-item"
-        ><i class="fa-solid fa-layer-group"></i><span>Danh mục</span></a
-      >
+      <button class="nav-item btn-mobile-menu">
+        <i class="fa-solid fa-layer-group"></i><span>Danh mục</span>
+      </button>
       <a href="#" class="nav-item active">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count-mobile">3</span>
@@ -549,5 +638,12 @@
         </p>
       </div>
     </footer>
+
+    <button id="backToTop" class="back-to-top" title="Lên đầu trang">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- DJANGO: src="{% static 'js/main.js' %}" -->
+    <script src="main.js"></script>
   </body>
 </html>
